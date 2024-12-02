@@ -1,3 +1,6 @@
+import { RcFile } from "antd/es/upload";
+import React from "react";
+
 export interface getDataType {
   count: number;
   next?: string | null;
@@ -18,8 +21,9 @@ export interface CreateData {
 }
 
 export interface FormDataType {
-  submit: (values: any) => void;
-  form: any;
+  submit?: (values: any) => void;
+  data?: object;
+  form?: any;
 }
 export interface DataType {
   key: string;
@@ -43,6 +47,14 @@ export interface columnType {
   width?: string;
   align?: any;
   fontWeight?: any;
-  //   render?: (image?: string | undefined) => React.ReactNode;
   render?: any;
+}
+export interface TabPropsTypes {
+  key: string;
+  label: string;
+  children?: React.FC | any;
+}
+export interface FormDatas {
+  title: string;
+  image?: { file: RcFile };
 }

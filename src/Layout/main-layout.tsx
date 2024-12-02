@@ -3,7 +3,6 @@ import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
 import { data } from "./layout-data";
 import { Link, Outlet } from "react-router-dom";
-
 const { Header, Sider, Content } = Layout;
 
 export const MainLayout: React.FC = () => {
@@ -18,14 +17,15 @@ export const MainLayout: React.FC = () => {
       icon: React.createElement(item.icon),
     };
   });
+  const Key: string | any = item.length > 0 ? item[0].key : "";
   return (
     <Layout>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
+      <Sider width={400} trigger={null} collapsible collapsed={collapsed}>
         <div className="demo-logo-vertical" />
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={["1"]}
+          defaultSelectedKeys={Key}
           style={{ height: "100vh" }}
           items={item}
         />

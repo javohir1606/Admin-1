@@ -2,9 +2,11 @@ import { useCreateData } from "../../Service/Mutation/useCreateData";
 import { ReusableForm } from "../Form";
 import { RcFile } from "antd/es/upload";
 import { message, Form } from "antd";
+import { useNavigate } from "react-router-dom";
 export const CreateCategory = () => {
   const { mutate } = useCreateData();
   const [form] = Form.useForm();
+  const navigate = useNavigate();
   const submit = (values: { title: string; image: { file: RcFile } }) => {
     const formData = new FormData();
 
@@ -17,6 +19,7 @@ export const CreateCategory = () => {
     mutate(formData, {
       onSuccess: () => {
         message.success("Category added successfully!");
+        navigate("/app");
         form.resetFields();
       },
       onError: (error) => {
@@ -27,7 +30,11 @@ export const CreateCategory = () => {
 
   return (
     <>
-      <ReusableForm submit={submit} form={form} />
+      <div
+        style={{ width: "400px", border: "2px solid black", padding: "20px" }}
+      >
+        <ReusableForm submit={submit} form={form} />
+      </div>
     </>
   );
 };

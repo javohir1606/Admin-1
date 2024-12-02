@@ -2,10 +2,19 @@ import { UploadOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Upload } from "antd";
 import React from "react";
 import { FormDataType } from "../../Types/data-types";
-export const ReusableForm: React.FC<FormDataType> = ({ submit, form }) => {
+export const ReusableForm: React.FC<FormDataType> = ({
+  submit,
+  form,
+  data,
+}) => {
   return (
     <>
-      <Form layout="vertical" onFinish={submit} form={form}>
+      <Form
+        layout="vertical"
+        initialValues={{ ...data }}
+        onFinish={submit}
+        form={form}
+      >
         <Form.Item
           label={"Title"}
           name={"title"}

@@ -1,4 +1,4 @@
-import { Button, Flex, message, Table } from "antd";
+import { Button, Flex, message, Table, Image } from "antd";
 import { Link } from "react-router-dom";
 import { useGetData } from "../../Service/Query/useGetData";
 import { columnType, Datas } from "../../Types/data-types";
@@ -17,6 +17,7 @@ export const CategoryList = () => {
   });
 
   const { mutate } = useDeleteData();
+
   const client = useQueryClient();
   const DeleteCategory = (id: number) => {
     mutate(id, {
@@ -46,7 +47,7 @@ export const CategoryList = () => {
       key: "image",
       render: (image: string) => (
         <div style={{ textAlign: "center" }}>
-          <img
+          <Image
             style={{
               width: "70px",
             }}
@@ -76,9 +77,13 @@ export const CategoryList = () => {
       width: "25%",
       render: (_: any, record: Datas) => (
         <Flex gap={"20px"} justify="center">
-          <Button type="primary" style={{ backgroundColor: "#f1cf0f" }}>
-            Edit
-          </Button>
+          <div>
+            <Link to={`/app/edit-category/${record.id}`}>
+              <Button type="primary" style={{ backgroundColor: "#f1cf0f" }}>
+                Edit
+              </Button>
+            </Link>
+          </div>
           <Button
             onClick={() => DeleteCategory(record.id)}
             type="primary"
