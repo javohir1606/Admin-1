@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  // UploadOutlined,
-  // UserOutlined,
-  // VideoCameraOutlined,
-} from "@ant-design/icons";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
 import { data } from "./layout-data";
 import { Link, Outlet } from "react-router-dom";
@@ -32,16 +26,23 @@ export const MainLayout: React.FC = () => {
           theme="dark"
           mode="inline"
           defaultSelectedKeys={["1"]}
+          style={{ height: "100vh" }}
           items={item}
         />
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }}>
+        <Header
+          style={{
+            padding: 0,
+            background: colorBgContainer,
+          }}
+        >
           <Button
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
             onClick={() => setCollapsed(!collapsed)}
             style={{
+              display: "block",
               fontSize: "16px",
               width: 64,
               height: 64,

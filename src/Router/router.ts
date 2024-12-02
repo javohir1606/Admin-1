@@ -4,6 +4,7 @@ import React from "react";
 import { nanoid } from "nanoid";
 import { BrandList } from "../Pages/Brand-List";
 import { Product } from "../Pages/Product";
+import { CreateCategory } from "../Components/Create-category";
 
 interface RouteType {
   component: React.FC;
@@ -30,5 +31,10 @@ export const RoutersData: RouteType[] = [
     id: nanoid(),
     component: Product,
     path: "/app/product",
+  },
+  {
+    id: nanoid(),
+    component: CreateCategory,
+    path: "/app/create-category",
   },
 ];
