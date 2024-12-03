@@ -39,6 +39,7 @@ export interface Datas {
   id: number;
   image: string;
   title: string;
+  parent?: string | any;
 }
 export interface columnType {
   title: string;
@@ -53,8 +54,10 @@ export interface TabPropsTypes {
   key: string;
   label: string;
   children?: React.FC | any;
+  // disabled?: boolean;
 }
 export interface FormDatas {
+  parent?: string | any;
   title: string;
   image?: { file: RcFile };
 }

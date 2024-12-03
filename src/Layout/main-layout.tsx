@@ -20,7 +20,13 @@ export const MainLayout: React.FC = () => {
   const Key: string | any = item.length > 0 ? item[0].key : "";
   return (
     <Layout>
-      <Sider width={400} trigger={null} collapsible collapsed={collapsed}>
+      <Sider
+        width={400}
+        trigger={null}
+        // style={{ overflowY: "hidden" }}
+        collapsible
+        collapsed={collapsed}
+      >
         <div className="demo-logo-vertical" />
         <Menu
           theme="dark"

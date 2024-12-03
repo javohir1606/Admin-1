@@ -4,9 +4,10 @@ import React from "react";
 import { nanoid } from "nanoid";
 import { BrandList } from "../Pages/Brand-List";
 import { Product } from "../Pages/Product";
-// import { CreateCategory } from "../Components/Create-category";
 import { CreateTabCategory } from "../Components/Create-Tabs";
 import { EditCategory } from "../Components/Edit-Category";
+import { CreateSubTabCategory } from "../Components/Create-Sub-Category-Tab";
+import { SubEditCategory } from "../Components/Sub-Edit-Category";
 
 interface RouteType {
   component: React.FC;
@@ -43,5 +44,15 @@ export const RoutersData: RouteType[] = [
     id: nanoid(),
     component: EditCategory,
     path: "/app/edit-category/:id",
+  },
+  {
+    id: nanoid(),
+    component: CreateSubTabCategory,
+    path: "/app/sub-category-list/create-sub-category",
+  },
+  {
+    id: nanoid(),
+    component: SubEditCategory,
+    path: "/app/sub-edit-category/:id",
   },
 ];

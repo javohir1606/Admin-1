@@ -1,5 +1,6 @@
-import { Button, Flex, message, Table, Image } from "antd";
+import { Button, Flex, message, Table, Image, Popconfirm } from "antd";
 import { Link } from "react-router-dom";
+
 import { useGetData } from "../../Service/Query/useGetData";
 import { columnType, Datas } from "../../Types/data-types";
 import { useDeleteData } from "../../Service/Mutation/useDeleteData";
@@ -84,13 +85,24 @@ export const CategoryList = () => {
               </Button>
             </Link>
           </div>
-          <Button
-            onClick={() => DeleteCategory(record.id)}
-            type="primary"
-            style={{ backgroundColor: "red" }}
-          >
-            Delete
-          </Button>
+          <div>
+            <Popconfirm
+              onConfirm={() => {
+                return DeleteCategory(record.id);
+              }}
+              cancelText={"No"}
+              okText={"Yes"}
+              title={"Do you wish to continue with past date?"}
+            >
+              <Button
+                // onClick={() => DeleteCategory(record.id)}
+                type="primary"
+                style={{ backgroundColor: "red" }}
+              >
+                Delete
+              </Button>
+            </Popconfirm>
+          </div>
         </Flex>
       ),
     },

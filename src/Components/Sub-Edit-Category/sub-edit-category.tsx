@@ -1,11 +1,11 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEditCategory } from "../../Service/Mutation/useEditCategory";
-import { ReusableForm } from "../Form";
 import { useGetSingleData } from "../../Service/Query/useGetSingleData";
 import { FormDatas } from "../../Types/data-types";
 import { message } from "antd";
+import { SubCategoryForm } from "../Sub-Category-Form";
 
-export const EditCategory = () => {
+export const SubEditCategory = () => {
   const { id } = useParams();
   const { data: singleData } = useGetSingleData(id);
   const { mutate } = useEditCategory();
@@ -14,6 +14,7 @@ export const EditCategory = () => {
   const submit = (data: FormDatas) => {
     const formData = new FormData();
     formData.append("title", data.title);
+    // formData.append("parent", data.parent);
     if (data.image) {
       formData.append("image", data.image.file);
     }
@@ -22,8 +23,8 @@ export const EditCategory = () => {
       { id, data: formData },
       {
         onSuccess: () => {
-          message.success("Edited successfully");
-          navigate("/app");
+          navigate("/app/sub-category-list");
+          message.success("gap yo");
         },
         onError: (err) => {
           message.error("You might miss to edit something ");
@@ -34,7 +35,7 @@ export const EditCategory = () => {
   };
   return (
     <>
-      <ReusableForm submit={submit} data={singleData} />
+      <SubCategoryForm submit={submit} data={singleData} />
     </>
   );
 };

@@ -9,13 +9,14 @@ export const CreateTabCategory = () => {
   const items: TabPropsTypes[] = [
     {
       key: nanoid(),
-      label: "Tab 1",
+      label: "Category",
       children: <CreateCategory />,
     },
     {
       key: nanoid(),
-      label: "Tab 2",
+      label: "Sub Category",
       children: <CraeteSubCategory />,
+      // disabled: true,
     },
   ];
   return <Tabs defaultActiveKey="1" items={items} />;
