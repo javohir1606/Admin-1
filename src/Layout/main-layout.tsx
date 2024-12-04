@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Button, Layout, Menu, theme } from "antd";
 import { data } from "./layout-data";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Navigate, Outlet } from "react-router-dom";
 const { Header, Sider, Content } = Layout;
+import Cookies from "js-cookie";
 
 export const MainLayout: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -18,6 +19,11 @@ export const MainLayout: React.FC = () => {
     };
   });
   const Key: string | any = item.length > 0 ? item[0].key : "";
+  const token = Cookies.get("Token");
+  if (!token) {
+    return <Navigate replace to={"/"} />;
+  }
+
   return (
     <Layout>
       <Sider

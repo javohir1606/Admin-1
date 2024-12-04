@@ -12,7 +12,7 @@ export const Login = () => {
       onSuccess: (res) => {
         Cookies.set("Token", res.token);
         message.success("welcome");
-        navigate("/app");
+        navigate("/app", { replace: true });
       },
       onError: (err) => {
         console.log(err);

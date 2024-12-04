@@ -2,11 +2,16 @@ import { RcFile } from "antd/es/upload";
 import { SubCategoryForm } from "../Sub-Category-Form";
 import { Form, message } from "antd";
 import { useCreateSub } from "../../Service/Mutation/useCreateSub";
-import { useNavigate } from "react-router-dom";
-export const CraeteSubCategory = () => {
+import React from "react";
+interface SubCategoryProps {
+  setActive: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export const CraeteSubCategory: React.FC<SubCategoryProps> = ({
+  setActive,
+}) => {
   const [form] = Form.useForm();
   const { mutate } = useCreateSub();
-  const navigate = useNavigate();
 
   const submit = (values: {
     title: string;
@@ -23,7 +28,7 @@ export const CraeteSubCategory = () => {
       onSuccess: () => {
         message.success("Category added successfully!");
         form.resetFields();
-        navigate("/app/sub-category-list");
+        setActive("2");
       },
       onError: (error) => {
         console.log(error);

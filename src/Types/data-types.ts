@@ -9,7 +9,6 @@ export interface getDataType {
     id: number;
     title: string;
     image: string;
-    // children?: string;
     parent?: {
       image: string;
     };
@@ -22,8 +21,10 @@ export interface CreateData {
 
 export interface FormDataType {
   submit?: (values: any) => void;
-  data?: object;
+  data?: object | any;
   form?: any;
+  isLoading?: boolean;
+  defaultFileList?: any;
 }
 export interface DataType {
   key: string;
@@ -54,7 +55,7 @@ export interface TabPropsTypes {
   key: string;
   label: string;
   children?: React.FC | any;
-  // disabled?: boolean;
+  disabled?: boolean;
 }
 export interface FormDatas {
   parent?: string | any;

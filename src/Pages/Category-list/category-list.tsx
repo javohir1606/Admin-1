@@ -62,7 +62,6 @@ export const CategoryList = () => {
       title: "Name",
       dataIndex: "title",
       key: "title",
-
       align: "center",
       render: (title: string) => (
         <div style={{ textAlign: "center" }}>

@@ -1,23 +1,30 @@
-import { Tabs } from "antd";
-// import { CreateCategory } from "../Create-category";
-import { CraeteSubCategory } from "../Create-Sub-Category/craete-sub-category";
+import { message, Tabs } from "antd";
 import { TabPropsTypes } from "../../Types/data-types";
-import { nanoid } from "nanoid";
 import { CreateCategory } from "../Create-category";
+import React from "react";
+import { CategorySubCreate } from "../Category-Sub-Create";
 
 export const CreateTabCategory = () => {
+  const [active, setActive] = React.useState<string>("1");
+  const handleTabChange = (key: string) => {
+    if ((key === "2" && active === "1") || (key === "1" && active === "2")) {
+      message.warning("Please complete the Category form before proceeding!");
+      return;
+    }
+    setActive(key);
+  };
+
   const items: TabPropsTypes[] = [
     {
-      key: nanoid(),
+      key: "1",
       label: "Category",
-      children: <CreateCategory />,
+      children: <CreateCategory setActive={setActive} />,
     },
     {
-      key: nanoid(),
+      key: "2",
       label: "Sub Category",
-      children: <CraeteSubCategory />,
-      // disabled: true,
+      children: <CategorySubCreate />,
     },
   ];
-  return <Tabs defaultActiveKey="1" items={items} />;
+  return <Tabs activeKey={active} items={items} onChange={handleTabChange} />;
 };

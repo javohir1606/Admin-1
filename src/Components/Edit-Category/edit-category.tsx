@@ -3,11 +3,11 @@ import { useEditCategory } from "../../Service/Mutation/useEditCategory";
 import { ReusableForm } from "../Form";
 import { useGetSingleData } from "../../Service/Query/useGetSingleData";
 import { FormDatas } from "../../Types/data-types";
-import { message } from "antd";
+import { message, UploadFile } from "antd";
 
 export const EditCategory = () => {
   const { id } = useParams();
-  const { data: singleData } = useGetSingleData(id);
+  const { data: singleData, isLoading } = useGetSingleData(id);
   const { mutate } = useEditCategory();
   const navigate = useNavigate();
 
@@ -32,9 +32,22 @@ export const EditCategory = () => {
       }
     );
   };
+  const defaultFileList: UploadFile[] = [
+    {
+      uid: "-1",
+      // name: `${data?.title}`,
+      status: "done",
+      url: `${singleData?.image}`,
+    },
+  ];
   return (
     <>
-      <ReusableForm submit={submit} data={singleData} />
+      <ReusableForm
+        submit={submit}
+        data={singleData}
+        isLoading={isLoading}
+        defaultFileList={defaultFileList}
+      />
     </>
   );
 };

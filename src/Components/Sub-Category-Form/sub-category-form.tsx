@@ -11,6 +11,7 @@ export const SubCategoryForm: React.FC<FormDataType> = ({
 }) => {
   const { data: parentTitle } = useGetData();
 
+  
   return (
     <>
       <Form
@@ -20,13 +21,14 @@ export const SubCategoryForm: React.FC<FormDataType> = ({
         form={form}
       >
         <Form.Item
-          label={"Title"}
+          label={"Parent"}
           name={"parent"}
-          rules={[{ required: true, message: "title kiriting" }]}
+          rules={[{ required: true, message: "parent kiriting" }]}
+          // initialValue={parentTitle?.results?.[0]?.title}
         >
           <Select>
             {parentTitle?.results?.map((item: Datas) => (
-              <Select.Option key={item.id} >{item.title}</Select.Option>
+              <Select.Option key={item.id}>{item.title}</Select.Option>
             ))}
           </Select>
         </Form.Item>
