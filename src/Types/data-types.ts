@@ -72,7 +72,7 @@ export interface AttrValue {
 export interface AttributeValuesType {
   title: string;
   value: string[];
-  items?: any;
+  attributes?: any;
 }
 
 interface Value {

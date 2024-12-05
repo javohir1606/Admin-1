@@ -7,6 +7,8 @@ import { useQueryClient } from "@tanstack/react-query";
 
 export const SubCategoryList = () => {
   const { data } = useGetSubCategory();
+
+  
   const { mutate } = useDeleteData();
   const client = useQueryClient();
   const dataSource = data?.results.map((item: Datas) => {

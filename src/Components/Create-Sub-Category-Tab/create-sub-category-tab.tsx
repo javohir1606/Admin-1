@@ -23,6 +23,7 @@ export const CreateSubTabCategory = () => {
   };
   const [form] = Form.useForm();
   const { mutate, data: createSub } = useCreateSub();
+
   const { mutate: Attribute } = useCreateAttribute();
   const submit = (values: {
     title: string;
@@ -50,8 +51,10 @@ export const CreateSubTabCategory = () => {
   const id = createSub?.id;
   const navigate = useNavigate();
   const AttributeValueSubmit = (data: AttributeValuesType) => {
+    console.log(data);
+
     const formattedData = {
-      attr_list: data?.items?.map((item: AttrValue) => ({
+      attr_list: data?.attributes?.map((item: AttrValue) => ({
         category: [id],
         title: item?.title,
         values: item?.values?.map((value: string | any) => value) || [],

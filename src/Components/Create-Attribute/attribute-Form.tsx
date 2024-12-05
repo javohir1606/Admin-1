@@ -18,7 +18,7 @@ export const AttributeForm: React.FC<FormDataType> = ({ submit }) => {
       autoComplete="off"
       initialValues={{ items: [{}] }}
     >
-      <Form.List name="items">
+      <Form.List name="attributes">
         {(fields, { add, remove }) => (
           <div style={{ display: "flex", rowGap: 16, flexDirection: "column" }}>
             {fields.map((field) => (

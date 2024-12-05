@@ -8,6 +8,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 export const CategoryList = () => {
   const { data } = useGetData();
+
   const dataSource = data?.results.map((item: Datas) => {
     return {
       key: item.id,

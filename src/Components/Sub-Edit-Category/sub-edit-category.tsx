@@ -8,6 +8,8 @@ import { ReusableForm } from "../Form";
 export const SubEditCategory = () => {
   const { id } = useParams();
   const { data: singleData, isLoading } = useGetSingleData(id);
+  console.log(singleData);
+
   const { mutate } = useEditCategory();
   const navigate = useNavigate();
 
