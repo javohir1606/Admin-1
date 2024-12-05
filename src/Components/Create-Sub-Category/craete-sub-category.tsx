@@ -19,6 +19,8 @@ export const CraeteSubCategory: React.FC<SubCategoryProps> = ({
     parent: string;
   }) => {
     const data = new FormData();
+    console.log(values);
+
     data.append("title", values.title);
     if (values.image) {
       data.append("image", values.image.file);

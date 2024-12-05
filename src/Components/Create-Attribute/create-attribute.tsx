@@ -7,6 +7,7 @@ export const CreateAttribute: React.FC = () => {
 
   return (
     <Form
+      layout="vertical"
       labelCol={{ span: 6 }}
       wrapperCol={{ span: 18 }}
       form={form}
@@ -79,6 +80,11 @@ export const CreateAttribute: React.FC = () => {
           </div>
         )}
       </Form.List>
+      <div>
+        <Form.Item style={{ marginTop: "30px" }}>
+          <Button>Send</Button>
+        </Form.Item>
+      </div>
     </Form>
   );
 };
