@@ -62,3 +62,28 @@ export interface FormDatas {
   title: string;
   image?: { file: RcFile };
 }
+
+export interface AttrValue {
+  category: number[];
+  title: string;
+  values: string[];
+}
+
+export interface AttributeValuesType {
+  title: string;
+  value: string[];
+  items?: any;
+}
+
+interface Value {
+  value: string;
+}
+
+interface Attribute {
+  title: string;
+  values: Value[];
+}
+
+export interface FormValues {
+  attr_list: Attribute[];
+}

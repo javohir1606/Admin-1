@@ -1,12 +1,14 @@
 import React from "react";
 import { CloseOutlined } from "@ant-design/icons";
 import { Button, Card, Form, Input, Space } from "antd";
+import { FormDataType } from "../../Types/data-types";
 
-export const CreateAttribute: React.FC = () => {
+export const AttributeForm: React.FC<FormDataType> = ({ submit }) => {
   const [form] = Form.useForm();
 
   return (
     <Form
+      onFinish={submit}
       layout="vertical"
       labelCol={{ span: 6 }}
       wrapperCol={{ span: 18 }}
@@ -32,11 +34,11 @@ export const CreateAttribute: React.FC = () => {
                   />
                 }
               >
-                <Form.Item label="Name" name={[field.name, "name"]}>
+                <Form.Item label="Name" name={[field.name, "title"]}>
                   <Input />
                 </Form.Item>
-                <Form.Item label="attributes">
-                  <Form.List name={[field.name, "list"]}>
+                <Form.Item label="attributes" name={"values"}>
+                  <Form.List name={[field.name, "values"]}>
                     {(subFields, subOpt) => (
                       <div
                         style={{
@@ -49,7 +51,7 @@ export const CreateAttribute: React.FC = () => {
                           <Space key={subField.key}>
                             <Form.Item
                               noStyle
-                              name={[subField.name, "add attribute"]}
+                              name={[subField.name, "values "]}
                             >
                               <Input placeholder="add attribute" />
                             </Form.Item>
@@ -82,7 +84,7 @@ export const CreateAttribute: React.FC = () => {
       </Form.List>
       <div>
         <Form.Item style={{ marginTop: "30px" }}>
-          <Button>Send</Button>
+          <Button htmlType="submit">Send</Button>
         </Form.Item>
       </div>
     </Form>

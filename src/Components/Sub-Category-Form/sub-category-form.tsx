@@ -11,7 +11,6 @@ export const SubCategoryForm: React.FC<FormDataType> = ({
 }) => {
   const { data: parentTitle } = useGetData();
 
-  
   return (
     <>
       <Form
