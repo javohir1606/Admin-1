@@ -35,7 +35,6 @@ export const EditCategory = () => {
   const defaultFileList: UploadFile[] = [
     {
       uid: "-1",
-      // name: `${data?.title}`,
       status: "done",
       url: `${singleData?.image}`,
     },
