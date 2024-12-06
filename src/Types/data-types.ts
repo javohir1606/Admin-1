@@ -64,7 +64,9 @@ export interface FormDatas {
 }
 
 export interface AttrValue {
-  category: number[];
+  category?: number[];
+  key?: number;
+  id?: number;
   title: string;
   values: string[];
 }
@@ -72,7 +74,7 @@ export interface AttrValue {
 export interface AttributeValuesType {
   title: string;
   value: string[];
-  attributes?: any;
+  attributes?: string | any;
 }
 
 interface Value {
@@ -86,4 +88,9 @@ interface Attribute {
 
 export interface FormValues {
   attr_list: Attribute[];
+}
+
+export interface qwerty {
+  title: string;
+  image: RcFile | null | any;
 }

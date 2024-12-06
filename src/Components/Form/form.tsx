@@ -1,7 +1,8 @@
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Upload } from "antd";
 import React from "react";
-import { FormDataType } from "../../Types/data-types";
+
+import { FormDataType, qwerty } from "../../Types/data-types";
 export const ReusableForm: React.FC<FormDataType> = ({
   submit,
   form,
@@ -9,13 +10,21 @@ export const ReusableForm: React.FC<FormDataType> = ({
   isLoading,
   defaultFileList,
 }) => {
+  const handleSubmit = (value: qwerty) => {
+    if (submit) {
+      submit({
+        title: value.title,
+        image: value.image ? value.image[0].originFileObj : null,
+      });
+    }
+  };
   return (
     <>
       {!isLoading && (
         <Form
           layout="vertical"
           initialValues={{ ...data }}
-          onFinish={submit}
+          onFinish={handleSubmit}
           form={form}
         >
           <Form.Item
@@ -33,11 +42,11 @@ export const ReusableForm: React.FC<FormDataType> = ({
           >
             <Upload
               style={{ width: "500px" }}
-              listType="picture"
+              listType="picture-card"
               beforeUpload={() => false}
-              accept="image"
+              accept="image/*"
               maxCount={1}
-              defaultFileList={defaultFileList}
+              defaultFileList={defaultFileList && defaultFileList}
             >
               <Button type="primary" icon={<UploadOutlined />}>
                 Upload

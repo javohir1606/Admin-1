@@ -39,7 +39,6 @@ export const SubEditCategory = () => {
   const defaultFileList: UploadFile[] = [
     {
       uid: "-1",
-      // name: `${data?.title}`,
       status: "done",
       url: `${singleData?.image}`,
     },
