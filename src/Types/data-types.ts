@@ -94,3 +94,12 @@ export interface qwerty {
   title: string;
   image: RcFile | null | any;
 }
+export interface AttributeValuesType {
+  attribute_id: number;
+  title: string;
+  values: {
+    value: string;
+    value_id: number;
+  }[];
+  category_id?: number;
+}

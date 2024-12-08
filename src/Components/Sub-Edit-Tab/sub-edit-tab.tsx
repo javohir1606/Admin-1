@@ -3,18 +3,17 @@ import { ReusableForm } from "../Form";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEditCategory } from "../../Service/Mutation/useEditCategory";
 import { useGetSingleData } from "../../Service/Query/useGetSingleData";
-import { FormDatas } from "../../Types/data-types";
+import { AttributeValuesType, FormDatas } from "../../Types/data-types";
 import { message, UploadFile } from "antd";
 import { AttributeForm } from "../Create-Attribute";
-// import { useAttributeEdit } from "../../Service/Mutation/useAttributeEdit";
+import { useAttributeEdit } from "../../Service/Mutation/useAttributeEdit";
 
 export const SubEditTab = () => {
   const { id } = useParams();
   const { data: singleData, isLoading } = useGetSingleData(id);
-
   const { mutate } = useEditCategory();
   const navigate = useNavigate();
-  //   const { mutate: AtrributeEdit } = useAttributeEdit();
+  const { mutate: editAttribute } = useAttributeEdit();
 
   const submit = (data: FormDatas) => {
     const formData = new FormData();
@@ -48,32 +47,39 @@ export const SubEditTab = () => {
     },
   ];
 
-  //   const AtrributeSubmit = (attributeData: any) => {
-  //     console.log("dataaaaaaa21uwrte", attributeData);
+  const AttributeId = singleData?.attributes?.map((item: any) => item.id);
+  const valueId = singleData?.attributes?.map((item: any) =>
+    item.values.map((subItem: any) => subItem.id)
+  );
+  const submitAttributeData = (values: any) => {
+    console.log("dataaaaaaaaaaaaaaaaaaaaaaa", values);
+    const processedAttributes = [
+      ...values?.attributes?.map(
+        (item: AttributeValuesType, index: number) => ({
+          attribute_id: AttributeId[index] ?? null,
+          title: item.title,
+          values: item.values?.map((subItem, subIndex) => ({
+            value: subItem.value,
+            value_id: valueId[index]?.[subIndex] ?? null,
+          })),
+        })
+      ),
+    ];
+    editAttribute(
+      { attributes: processedAttributes, category_id: singleData.id },
+      {
+        onSuccess: () => {
+          message.success("Attributes updated successfully!");
+        },
+        onError: (err) => {
+          message.error("Failed to update attributes!");
+          console.error("errorasdasd", err);
+        },
+      }
+    );
+  };
 
-  //     // const NewEditedData = {
-  //     //   attr_list: attributeData?.attributes?.map((item: AttrValue) => ({
-  //     //     category: [id],
-  //     //     title: item?.title,
-  //     //     values: item?.values?.map((value: string | number | any) => id) || [],
-  //     //   })),
-  //     // };
-  //     // console.log("newdataedited", NewEditedData);
-
-  //     AtrributeEdit(
-  //       { id, NewEditedData },
-  //       {
-  //         onSuccess: () => {
-  //           message.success("attribute edited successfully");
-  //           navigate("/app/sub-category-list");
-  //         },
-  //         onError: (err) => {
-  //           console.log(err);
-  //         },
-  //       }
-  //     );
-  //   };
-
+  //////////////////////
   return (
     <>
       <Tabs
@@ -96,7 +102,7 @@ export const SubEditTab = () => {
             label: "Edit Sub Category",
             children: (
               <AttributeForm
-                // submit={AtrributeSubmit}
+                submit={submitAttributeData}
                 data={singleData}
                 isLoading={isLoading}
               />
