@@ -66,7 +66,7 @@ export const SubEditTab = () => {
       ),
     ];
     editAttribute(
-      { attributes: processedAttributes, category_id: singleData.id },
+      { attributes: processedAttributes, category_id: Number(id) },
       {
         onSuccess: () => {
           message.success("Attributes updated successfully!");
@@ -80,7 +80,6 @@ export const SubEditTab = () => {
     );
   };
 
-  //////////////////////
   return (
     <>
       <Tabs
@@ -103,6 +102,7 @@ export const SubEditTab = () => {
             label: "Edit Sub Category",
             children: (
               <AttributeForm
+                // submit={editAttributes}
                 submit={submitAttributeData}
                 data={singleData}
                 isLoading={isLoading}
