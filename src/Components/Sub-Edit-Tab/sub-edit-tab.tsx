@@ -70,6 +70,7 @@ export const SubEditTab = () => {
       {
         onSuccess: () => {
           message.success("Attributes updated successfully!");
+          navigate("/app/sub-category-list");
         },
         onError: (err) => {
           message.error("Failed to update attributes!");
