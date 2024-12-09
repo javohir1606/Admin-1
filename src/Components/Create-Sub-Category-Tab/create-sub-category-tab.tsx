@@ -3,6 +3,7 @@ import {
   AttributeValuesType,
   AttrValue,
   TabPropsTypes,
+  // Valueee,
 } from "../../Types/data-types";
 import React from "react";
 import { AttributeForm } from "../Create-Attribute";
@@ -57,8 +58,9 @@ export const CreateSubTabCategory = () => {
         category: [id],
         title: item?.title,
         values:
-          item?.values?.map((value: string | number | any) => value?.value) ||
-          [],
+          item?.values?.map(
+            (value: string | undefined | any) => value?.value
+          ) || [],
       })),
     };
 

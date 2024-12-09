@@ -3,7 +3,11 @@ import { ReusableForm } from "../Form";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEditCategory } from "../../Service/Mutation/useEditCategory";
 import { useGetSingleData } from "../../Service/Query/useGetSingleData";
-import { AttributeValuesType, FormDatas } from "../../Types/data-types";
+import {
+  // AttributeTypeValues,
+  AttributeValuesType,
+  FormDatas,
+} from "../../Types/data-types";
 import { message, UploadFile } from "antd";
 import { AttributeForm } from "../Create-Attribute";
 import { useAttributeEdit } from "../../Service/Mutation/useAttributeEdit";
@@ -51,7 +55,7 @@ export const SubEditTab = () => {
   const valueId = singleData?.attributes?.map((item: any) =>
     item.values.map((subItem: any) => subItem.id)
   );
-  const submitAttributeData = (values: any) => {
+  const submitAttributeData = (values: AttributeValuesType) => {
     console.log("dataaaaaaaaaaaaaaaaaaaaaaa", values);
     const processedAttributes = [
       ...values?.attributes?.map(
@@ -102,7 +106,6 @@ export const SubEditTab = () => {
             label: "Edit Sub Category",
             children: (
               <AttributeForm
-                // submit={editAttributes}
                 submit={submitAttributeData}
                 data={singleData}
                 isLoading={isLoading}

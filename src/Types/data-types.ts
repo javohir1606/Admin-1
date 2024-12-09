@@ -71,10 +71,12 @@ export interface AttrValue {
   values: string[];
 }
 
-export interface AttributeValuesType {
-  title: string;
-  value: string[];
-  attributes?: string | any;
+export interface AttributeTypeValues {
+  title?: string;
+  value?: string[];
+  category_id?: number;
+  attribute_id?: number;
+  attributes?: [];
 }
 
 interface Value {
@@ -95,11 +97,12 @@ export interface qwerty {
   image: RcFile | null | any;
 }
 export interface AttributeValuesType {
-  attribute_id: number;
-  title: string;
-  values: {
-    value: string;
-    value_id: number;
+  title?: string;
+  values?: {
+    value?: string;
+    value_id?: number;
   }[];
   category_id?: number;
+  attribute_id?: number;
+  attributes?: string[] | any;
 }
