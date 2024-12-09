@@ -51,8 +51,10 @@ export const SubEditTab = () => {
     },
   ];
 
-  const AttributeId = singleData?.attributes?.map((item: any) => item.id);
-  const valueId = singleData?.attributes?.map((item: any) =>
+  const AttributeId = singleData?.attributes?.map(
+    (item: number | any) => item.id
+  );
+  const valueId = singleData?.attributes?.map((item: number | any) =>
     item.values.map((subItem: any) => subItem.id)
   );
   const submitAttributeData = (values: AttributeValuesType) => {

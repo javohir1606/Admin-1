@@ -9,7 +9,6 @@ export const AttributeForm: React.FC<FormDataType> = ({
   isLoading,
 }) => {
   const [form] = Form.useForm();
-  console.log("datwewe", data);
   const initialData = {
     attributes: data?.attributes?.map((item: AttrValue) => ({
       title: item.title,
@@ -29,7 +28,6 @@ export const AttributeForm: React.FC<FormDataType> = ({
           style={{ maxWidth: 600 }}
           initialValues={initialData}
           autoComplete="off"
-          // initialValues={{ items: [{}] }}
         >
           <Form.List name="attributes">
             {(fields, { add, remove }) => (

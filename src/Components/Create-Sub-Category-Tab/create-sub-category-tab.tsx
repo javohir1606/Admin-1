@@ -51,8 +51,6 @@ export const CreateSubTabCategory = () => {
   const id = createSub?.id;
   const navigate = useNavigate();
   const AttributeValueSubmit = (data: AttributeValuesType) => {
-    console.log(data);
-
     const formattedData = {
       attr_list: data?.attributes?.map((item: AttrValue) => ({
         category: [id],
