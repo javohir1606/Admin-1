@@ -17,9 +17,7 @@ export const CreateTabCategory = () => {
 
   const submit = (values: { title: string; image: { file: RcFile } }) => {
     const formData = new FormData();
-
     formData.append("title", values.title);
-
     if (values.image) {
       formData.append("image", values.image.file);
     }
@@ -72,13 +70,13 @@ export const CreateTabCategory = () => {
           {
             key: "1",
             label: "Add Category",
-            children: <ReusableForm submit={submit} form={form} />,
+            children: <ReusableForm submit={submit} formForCreate={form} />,
           },
           {
             key: "2",
             label: "Sub Category",
             disabled: !categoryData?.id,
-            children: <ReusableForm submit={SubCategorySubmit} form={form} />,
+            children: <ReusableForm submit={SubCategorySubmit} formForCreate={form} />,
           },
         ]}
       ></Tabs>

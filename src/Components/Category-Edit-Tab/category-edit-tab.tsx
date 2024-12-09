@@ -13,12 +13,15 @@ export const CategoryEditTab = () => {
   const { id } = useParams();
   const { data: singleData, isLoading } = useGetSingleData(id);
   const { mutate } = useEditCategory();
+  const { data } = useGetData();
+  const { mutate: Delete } = useDeleteData();
+  const client = useQueryClient();
   const navigate = useNavigate();
   const submit = (data: FormDatas) => {
     const formData = new FormData();
     formData.append("title", data.title);
-    if (data.image) {
-      formData.append("image", data.image.file);
+    if (data?.image?.file) {
+      formData.append("image", data?.image.file);
     }
 
     mutate(
@@ -35,6 +38,19 @@ export const CategoryEditTab = () => {
       }
     );
   };
+  const DeleteCategory = (id: number) => {
+    Delete(id, {
+      onSuccess: () => {
+        message.success("success");
+        client.invalidateQueries({ queryKey: ["get-data"] });
+      },
+      onError: (error) => {
+        console.log(error);
+
+        message.error("error");
+      },
+    });
+  };
   const defaultFileList: UploadFile[] = [
     {
       uid: "-1",
@@ -42,10 +58,6 @@ export const CategoryEditTab = () => {
       url: `${singleData?.image}`,
     },
   ];
-  const { data } = useGetData();
-  const { mutate: Delete } = useDeleteData();
-  const client = useQueryClient();
-
   const dataSource = data?.results
     ?.filter((item: Datas) => item.id === Number(id))
     .flatMap(
@@ -130,20 +142,6 @@ export const CategoryEditTab = () => {
       ),
     },
   ];
-
-  const DeleteCategory = (id: number) => {
-    Delete(id, {
-      onSuccess: () => {
-        message.success("success");
-        client.invalidateQueries({ queryKey: ["get-data"] });
-      },
-      onError: (error) => {
-        console.log(error);
-
-        message.error("error");
-      },
-    });
-  };
 
   return (
     <>

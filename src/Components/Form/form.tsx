@@ -1,31 +1,40 @@
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Upload } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 
-import { FormDataType, qwerty } from "../../Types/data-types";
+import { FormDataType } from "../../Types/data-types";
 export const ReusableForm: React.FC<FormDataType> = ({
   submit,
-  form,
   data,
   isLoading,
   defaultFileList,
+  formForCreate,
 }) => {
-  const handleSubmit = (value: qwerty) => {
-    if (submit) {
-      submit({
-        title: value.title,
-        image: value.image ? value.image[0].originFileObj : null,
+  const [form] = Form.useForm();
+  // const initialValues = {
+  //   title: data?.title || "",
+  //   image: data?.image ? { url: data.image.url } : null,
+  // };
+
+  useEffect(() => {
+    if (data && data.image) {
+      form.setFieldsValue({
+        title: data.title || "",
+        image: data.image
+          ? { uid: "-1", url: data.image, status: "done" }
+          : null,
       });
     }
-  };
+  }, [data, form]);
+
   return (
     <>
       {!isLoading && (
         <Form
           layout="vertical"
-          initialValues={{ ...data }}
-          onFinish={handleSubmit}
-          form={form}
+          // initialValues={initialValues}
+          onFinish={submit}
+          form={data && data?.image ? form : formForCreate}
         >
           <Form.Item
             label={"Title"}
@@ -63,3 +72,8 @@ export const ReusableForm: React.FC<FormDataType> = ({
     </>
   );
 };
+
+// // //
+// /* -------------------------------------------------------------------------- */
+
+// /* -------------------------------------------------------------------------- */

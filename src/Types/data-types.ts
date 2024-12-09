@@ -22,7 +22,7 @@ export interface CreateData {
 export interface FormDataType {
   submit?: (values: any) => void;
   data?: object | any;
-  form?: any;
+  formForCreate?: any;
   isLoading?: boolean;
   defaultFileList?: any;
 }

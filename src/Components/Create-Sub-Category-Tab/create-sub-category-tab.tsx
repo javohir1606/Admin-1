@@ -77,12 +77,14 @@ export const CreateSubTabCategory = () => {
     {
       key: "1",
       label: "Sub Category",
-      children: <SubCategoryForm submit={submit} form={form} />,
+      children: <SubCategoryForm submit={submit} formForCreate={form} />,
     },
     {
       key: "2",
       label: "Attribute",
-      children: <AttributeForm submit={AttributeValueSubmit} form={form} />,
+      children: (
+        <AttributeForm submit={AttributeValueSubmit} formForCreate={form} />
+      ),
     },
   ];
   return <Tabs activeKey={active} items={items} onChange={handleTabChange} />;
