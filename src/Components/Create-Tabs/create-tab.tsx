@@ -41,7 +41,6 @@ export const CreateTabCategory = () => {
   }) => {
     const formData = new FormData();
     values.parent = categoryData?.id;
-    console.log("parent", values);
 
     formData.append("title", values.title);
     if (values.image) {
@@ -76,7 +75,9 @@ export const CreateTabCategory = () => {
             key: "2",
             label: "Sub Category",
             disabled: !categoryData?.id,
-            children: <ReusableForm submit={SubCategorySubmit} formForCreate={form} />,
+            children: (
+              <ReusableForm submit={SubCategorySubmit} formForCreate={form} />
+            ),
           },
         ]}
       ></Tabs>

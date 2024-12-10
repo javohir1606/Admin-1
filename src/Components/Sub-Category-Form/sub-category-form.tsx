@@ -6,7 +6,7 @@ import { useGetData } from "../../Service/Query/useGetData";
 
 export const SubCategoryForm: React.FC<FormDataType> = ({
   submit,
-  form,
+  formForCreate,
   data,
 }) => {
   const { data: parentTitle } = useGetData();
@@ -17,7 +17,7 @@ export const SubCategoryForm: React.FC<FormDataType> = ({
         layout="vertical"
         initialValues={{ ...data }}
         onFinish={submit}
-        form={form}
+        form={formForCreate}
       >
         <Form.Item
           label={"Parent"}

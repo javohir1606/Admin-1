@@ -22,9 +22,7 @@ export const SubEditTab = () => {
   const submit = (data: FormDatas) => {
     const formData = new FormData();
     formData.append("title", data.title);
-    // formData.append("parent", data.parent);
-
-    if (data.image) {
+    if (data.image?.file) {
       formData.append("image", data.image.file);
     }
 
@@ -58,7 +56,6 @@ export const SubEditTab = () => {
     item.values.map((subItem: any) => subItem.id)
   );
   const submitAttributeData = (values: AttributeValuesType) => {
-    console.log("dataaaaaaaaaaaaaaaaaaaaaaa", values);
     const processedAttributes = [
       ...values?.attributes?.map(
         (item: AttributeValuesType, index: number) => ({
