@@ -1,13 +1,14 @@
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Upload } from "antd";
 import React, { useEffect } from "react";
-import { FormDataType } from "../../Types/data-types";
-export const ReusableForm: React.FC<FormDataType> = ({
+import { BrandFormType } from "../../Types/data-types";
+
+export const BrandDataForm: React.FC<BrandFormType> = ({
   submit,
-  data,
-  isLoading,
-  defaultFileList,
   formForCreate,
+  isLoading,
+  data,
+  defaultFileList,
 }) => {
   const [form] = Form.useForm();
 
@@ -26,7 +27,6 @@ export const ReusableForm: React.FC<FormDataType> = ({
     <>
       {!isLoading && (
         <Form
-        // initialValues={initialValues}
           layout="vertical"
           onFinish={submit}
           form={data && data?.image ? form : formForCreate}
@@ -57,11 +57,9 @@ export const ReusableForm: React.FC<FormDataType> = ({
               </Button>
             </Upload>
           </Form.Item>
-          <Form.Item>
-            <Button htmlType="submit" type="primary">
-              Send
-            </Button>
-          </Form.Item>
+          <Button htmlType="submit" type="default">
+            Send
+          </Button>
         </Form>
       )}
     </>

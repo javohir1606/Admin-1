@@ -8,6 +8,9 @@ import { CreateTabCategory } from "../Components/Create-Tabs";
 import { CreateSubTabCategory } from "../Components/Create-Sub-Category-Tab";
 import { CategoryEditTab } from "../Components/Category-Edit-Tab";
 import { SubEditTab } from "../Components/Sub-Edit-Tab";
+import { Banner } from "../Pages/Banner";
+import { CreateBrand } from "../Components/Create-Brand";
+import { BrandListEdit } from "../Components/Brand-List";
 
 interface RouteType {
   component: React.FC;
@@ -29,6 +32,11 @@ export const RoutersData: RouteType[] = [
     id: nanoid(),
     component: BrandList,
     path: "/app/brand-list",
+  },
+  {
+    id: nanoid(),
+    component: Banner,
+    path: "/app/banner",
   },
   {
     id: nanoid(),
@@ -54,5 +62,15 @@ export const RoutersData: RouteType[] = [
     id: nanoid(),
     component: SubEditTab,
     path: "/app/sub-edit-category/:id",
+  },
+  {
+    id: nanoid(),
+    component: BrandListEdit,
+    path: "/app/brand-list-edit/:id",
+  },
+  {
+    id: nanoid(),
+    component: CreateBrand,
+    path: "/app/brand-list/create-brand",
   },
 ];

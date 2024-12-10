@@ -106,3 +106,10 @@ export interface AttributeValuesType {
   attribute_id?: number;
   attributes?: string[] | any;
 }
+export interface BrandFormType {
+  submit?: (values: any) => void;
+  data?: object | any;
+  formForCreate?: any;
+  isLoading?: boolean;
+  defaultFileList?: any;
+}

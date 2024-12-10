@@ -18,7 +18,6 @@ export const MainLayout: React.FC = () => {
       icon: React.createElement(item.icon),
     };
   });
-  const Key: string | any = item.length > 0 ? item[0].key : "";
   const token = Cookies.get("Token");
   if (!token) {
     return <Navigate replace to={"/"} />;
@@ -37,7 +36,6 @@ export const MainLayout: React.FC = () => {
         <Menu
           theme="dark"
           mode="inline"
-          defaultSelectedKeys={Key}
           style={{ height: "100vh" }}
           items={item}
         />

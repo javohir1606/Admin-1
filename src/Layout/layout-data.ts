@@ -1,4 +1,4 @@
-import { nanoid } from "nanoid";
+
 import {
   //   UserOutlined,
   //   UserAddOutlined,
@@ -6,29 +6,36 @@ import {
   DatabaseOutlined,
   ShoppingOutlined,
   SkinOutlined,
+  BoldOutlined,
 } from "@ant-design/icons";
 
 export const data = [
   {
-    id: nanoid(),
+    id: "1",
     label: "Category-List",
     icon: DatabaseOutlined,
     path: "/app",
   },
   {
-    id: nanoid(),
+    id: "2",
     label: "Sub-Category-List",
     icon: ClusterOutlined,
     path: "/app/sub-category-list",
   },
   {
-    id: nanoid(),
+    id: "3",
     label: "Brand-List",
     icon: SkinOutlined,
     path: "/app/brand-list",
   },
   {
-    id: nanoid(),
+    id: "4",
+    label: "Banner-List",
+    icon: BoldOutlined,
+    path: "/app/banner",
+  },
+  {
+    id: "5",
     label: "Product",
     icon: ShoppingOutlined,
     path: "/app/product",
