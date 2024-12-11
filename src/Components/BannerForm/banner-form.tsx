@@ -1,6 +1,6 @@
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Upload, UploadFile } from "antd";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BrandFormType } from "../../Types/data-types";
 import TextArea from "antd/es/input/TextArea";
 
@@ -9,19 +9,14 @@ export const BannerForm: React.FC<BrandFormType> = ({
   formForCreate,
   isLoading,
   data,
-  //   defaultFileList,
   BooleanImage,
+  defaultFileList,
 }) => {
-  const defaultFileList: UploadFile[] = [
-    {
-      uid: "-1",
-      status: "done",
-      url: `${data?.image}`,
-    },
-  ];
   const [form] = Form.useForm();
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
+
   useEffect(() => {
-    if (data && data.image) {
+    if (data) {
       form.setFieldsValue({
         title: data.title || "",
         description: data.description || "",
@@ -29,8 +24,19 @@ export const BannerForm: React.FC<BrandFormType> = ({
           ? { uid: "-1", url: data.image, status: "done" }
           : null,
       });
+      setFileList(
+        data.image
+          ? [
+              {
+                uid: "-1",
+                status: "done",
+                url: data.image,
+              },
+            ]
+          : []
+      );
     }
-  }, [data, form]);
+  }, [form, data]);
 
   return (
     <>
@@ -38,7 +44,7 @@ export const BannerForm: React.FC<BrandFormType> = ({
         <Form
           layout="vertical"
           onFinish={submit}
-          form={data ? form : formForCreate}
+          form={data && data?.image ? form : formForCreate}
         >
           <Form.Item
             label={"Title"}
@@ -52,7 +58,6 @@ export const BannerForm: React.FC<BrandFormType> = ({
             name={"description"}
             rules={[{ required: true, message: "description  kiriting" }]}
           >
-            {/* <Input placeholder="Title" /> */}
             <TextArea rows={6} />
           </Form.Item>
           <Form.Item
@@ -67,6 +72,8 @@ export const BannerForm: React.FC<BrandFormType> = ({
               beforeUpload={() => false}
               accept="image/*"
               maxCount={1}
+              fileList={fileList}
+              onChange={({ fileList: newFileList }) => setFileList(newFileList)}
               defaultFileList={BooleanImage ? defaultFileList : []}
             >
               <Button type="primary" icon={<UploadOutlined />}>

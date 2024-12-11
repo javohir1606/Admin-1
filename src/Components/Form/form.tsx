@@ -1,6 +1,6 @@
 import { UploadOutlined } from "@ant-design/icons";
-import { Button, Form, Input, Upload } from "antd";
-import React, { useEffect } from "react";
+import { Button, Form, Input, Upload, UploadFile } from "antd";
+import React, { useEffect, useState } from "react";
 import { FormDataType } from "../../Types/data-types";
 export const ReusableForm: React.FC<FormDataType> = ({
   submit,
@@ -10,23 +10,36 @@ export const ReusableForm: React.FC<FormDataType> = ({
   formForCreate,
 }) => {
   const [form] = Form.useForm();
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   useEffect(() => {
-    if (data && data.image) {
+    if (data) {
       form.setFieldsValue({
         title: data.title || "",
+        description: data.description || "",
         image: data.image
           ? { uid: "-1", url: data.image, status: "done" }
           : null,
       });
+      setFileList(
+        data.image
+          ? [
+              {
+                uid: "-1",
+                status: "done",
+                url: data.image,
+              },
+            ]
+          : []
+      );
     }
-  }, [data, form]);
+  }, [form, data]);
 
   return (
     <>
       {!isLoading && (
         <Form
-        // initialValues={initialValues}
+          // initialValues={initialValues}
           layout="vertical"
           onFinish={submit}
           form={data && data?.image ? form : formForCreate}
@@ -50,6 +63,8 @@ export const ReusableForm: React.FC<FormDataType> = ({
               beforeUpload={() => false}
               accept="image/*"
               maxCount={1}
+              fileList={fileList}
+              onChange={({ fileList: newFileList }) => setFileList(newFileList)}
               defaultFileList={defaultFileList && defaultFileList}
             >
               <Button type="primary" icon={<UploadOutlined />}>

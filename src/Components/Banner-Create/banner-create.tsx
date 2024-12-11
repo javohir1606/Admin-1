@@ -1,4 +1,4 @@
-import { message } from "antd";
+import { Form, message } from "antd";
 import { useCreateBanner } from "../../Service/Mutation/useCreateBanner";
 import { BannerForm } from "../BannerForm";
 import { RcFile } from "antd/es/upload";
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 export const BannerCreate = () => {
   const { mutate } = useCreateBanner();
   const navigate = useNavigate();
+  const [form] = Form.useForm();
   const CreateBannerSubmit = (values: {
     title: string;
     description: string;
@@ -33,7 +34,7 @@ export const BannerCreate = () => {
 
   return (
     <>
-      <BannerForm submit={CreateBannerSubmit} />
+      <BannerForm submit={CreateBannerSubmit} formForCreate={form} />
     </>
   );
 };
