@@ -40,6 +40,7 @@ export interface Datas {
   id: number;
   image: string;
   title: string;
+  description: string;
   parent?: string | any;
 }
 export interface columnType {
@@ -59,7 +60,8 @@ export interface TabPropsTypes {
 }
 export interface FormDatas {
   parent?: string | any;
-  title: string;
+  title?: string | Blob | any;
+  description?: string | any;
   image?: { file: RcFile };
 }
 
