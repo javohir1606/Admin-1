@@ -114,4 +114,5 @@ export interface BrandFormType {
   formForCreate?: any;
   isLoading?: boolean;
   defaultFileList?: any;
+  BooleanImage?: boolean;
 }

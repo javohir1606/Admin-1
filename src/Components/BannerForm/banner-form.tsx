@@ -1,5 +1,5 @@
 import { UploadOutlined } from "@ant-design/icons";
-import { Button, Form, Input, Upload } from "antd";
+import { Button, Form, Input, Upload, UploadFile } from "antd";
 import React, { useEffect } from "react";
 import { BrandFormType } from "../../Types/data-types";
 import TextArea from "antd/es/input/TextArea";
@@ -9,10 +9,17 @@ export const BannerForm: React.FC<BrandFormType> = ({
   formForCreate,
   isLoading,
   data,
-  defaultFileList,
+  //   defaultFileList,
+  BooleanImage,
 }) => {
+  const defaultFileList: UploadFile[] = [
+    {
+      uid: "-1",
+      status: "done",
+      url: `${data?.image}`,
+    },
+  ];
   const [form] = Form.useForm();
-
   useEffect(() => {
     if (data && data.image) {
       form.setFieldsValue({
@@ -31,7 +38,7 @@ export const BannerForm: React.FC<BrandFormType> = ({
         <Form
           layout="vertical"
           onFinish={submit}
-          form={data && data?.image ? form : formForCreate}
+          form={data ? form : formForCreate}
         >
           <Form.Item
             label={"Title"}
@@ -60,7 +67,7 @@ export const BannerForm: React.FC<BrandFormType> = ({
               beforeUpload={() => false}
               accept="image/*"
               maxCount={1}
-              defaultFileList={defaultFileList && defaultFileList}
+              defaultFileList={BooleanImage ? defaultFileList : []}
             >
               <Button type="primary" icon={<UploadOutlined />}>
                 Upload

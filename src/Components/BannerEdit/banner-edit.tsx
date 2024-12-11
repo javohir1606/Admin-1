@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { BannerForm } from "../BannerForm";
 import { FormDatas } from "../../Types/data-types";
-import { message, UploadFile } from "antd";
+import { message } from "antd";
 import { useGetSingleBannerData } from "../../Service/Query/useGetSingleBannerData";
 import { useBannerEdit } from "../../Service/Mutation/useBannerEdit";
 
@@ -10,18 +10,16 @@ export const BannerEdit = () => {
   const { data: BannerSingleData, isLoading } = useGetSingleBannerData(id);
   const { mutate } = useBannerEdit();
   const navigate = useNavigate();
-  const BannerEditSubmit = (values: FormDatas) => {
-    console.log(values);
-
+  const BannerEditSubmit = (data: FormDatas) => {
+    console.log(data);
     const Dataaa = new FormData();
-    Dataaa.append("title", values.title);
-    Dataaa.append("description", values.description);
-    if (values?.image?.file) {
-      Dataaa.append("image", values?.image.file);
+    Dataaa.append("title", data.title);
+    Dataaa.append("description", data.description);
+    if (data?.image?.file) {
+      Dataaa.append("image", data?.image.file);
     }
     mutate(
-      { id, values: Dataaa },
-
+      { id, data: Dataaa },
       {
         onSuccess: () => {
           message.success("success");
@@ -34,20 +32,15 @@ export const BannerEdit = () => {
       }
     );
   };
-  const defaultFileList: UploadFile[] = [
-    {
-      uid: "-1",
-      status: "done",
-      url: `${BannerSingleData?.image}`,
-    },
-  ];
+
   return (
     <>
       <BannerForm
         submit={BannerEditSubmit}
         data={BannerSingleData}
         isLoading={isLoading}
-        defaultFileList={defaultFileList}
+        // defaultFileList={defaultFileList}
+        BooleanImage={true}
       />
     </>
   );
