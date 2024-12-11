@@ -63,6 +63,10 @@ export interface FormDatas {
   title?: string | Blob | any;
   description?: string | any;
   image?: { file: RcFile };
+  is_new?: boolean | undefined | any;
+  is_available?: boolean | undefined | any;
+  category?: number | undefined | any;
+  price?: number | string | any;
 }
 
 export interface AttrValue {
@@ -116,3 +120,7 @@ export interface BrandFormType {
   defaultFileList?: any;
   BooleanImage?: boolean;
 }
+
+// export interface CreateProductType {
+//   values
+// }

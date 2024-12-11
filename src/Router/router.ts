@@ -13,6 +13,8 @@ import { CreateBrand } from "../Components/Create-Brand";
 import { BrandListEdit } from "../Components/Brand-List";
 import { BannerCreate } from "../Components/Banner-Create/banner-create";
 import { BannerEdit } from "../Components/BannerEdit";
+import { CreateProducts } from "../Components/Create-Products";
+import { ProductEdit } from "../Components/Product-Edit";
 
 interface RouteType {
   component: React.FC;
@@ -84,5 +86,15 @@ export const RoutersData: RouteType[] = [
     id: nanoid(),
     component: BannerEdit,
     path: "/app/banner/edit/:id",
+  },
+  {
+    id: nanoid(),
+    component: CreateProducts,
+    path: "/app/product/create",
+  },
+  {
+    id: nanoid(),
+    component: ProductEdit,
+    path: "/app/product/edit/:id",
   },
 ];
