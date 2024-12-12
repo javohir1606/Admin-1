@@ -41,6 +41,7 @@ export interface Datas {
   image: string;
   title: string;
   description: string;
+  category?: string | number;
   parent?: string | any;
 }
 export interface columnType {

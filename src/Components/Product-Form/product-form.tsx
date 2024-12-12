@@ -88,7 +88,7 @@ export const ProductForm: React.FC<FormDataType> = ({
             name={"price"}
             rules={[{ required: true, message: "title kiriting" }]}
           >
-            <Input placeholder="Title" />
+            <Input placeholder="Price" />
           </Form.Item>
           <Form.Item
             label={"img"}

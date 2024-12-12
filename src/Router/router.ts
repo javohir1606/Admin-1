@@ -1,3 +1,4 @@
+import { ProductVariants } from "./../Pages/Product-Variants/product-variants";
 import { CategoryList } from "../Pages/Category-list";
 import { SubCategoryList } from "../Pages/Sub-Category-List/sub-cotegory-list";
 import React from "react";
@@ -15,6 +16,7 @@ import { BannerCreate } from "../Components/Banner-Create/banner-create";
 import { BannerEdit } from "../Components/BannerEdit";
 import { CreateProducts } from "../Components/Create-Products";
 import { ProductEdit } from "../Components/Product-Edit";
+import { ProductVariantsCreate } from "../Components/Product-Variants-Create";
 
 interface RouteType {
   component: React.FC;
@@ -96,5 +98,15 @@ export const RoutersData: RouteType[] = [
     id: nanoid(),
     component: ProductEdit,
     path: "/app/product/edit/:id",
+  },
+  {
+    id: nanoid(),
+    component: ProductVariants,
+    path: "/app/product/variants/:id/:category",
+  },
+  {
+    id: nanoid(),
+    component: ProductVariantsCreate,
+    path: "/app/product/variants/:id/:category/create",
   },
 ];

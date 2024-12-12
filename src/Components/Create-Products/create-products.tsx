@@ -15,11 +15,10 @@ export const CreateProducts = () => {
     is_available?: boolean | undefined | any;
     is_new?: boolean | undefined | any;
   }) => {
-    console.log("valueess", values?.category);
-
     const formData = new FormData();
+    const formattedPrice = parseFloat(values.price).toFixed(2);
     formData.append("title", values.title);
-    formData.append("price", values.price);
+    formData.append("price", formattedPrice);
     formData.append("category", values.category);
     formData.append("is_available", values.is_available);
     formData.append("is_new", values.is_new);

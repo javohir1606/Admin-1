@@ -14,8 +14,9 @@ export const ProductEdit = () => {
 
   const ProductEditSubmit = (data: FormDatas) => {
     const formData = new FormData();
+    const formattedPrice = parseFloat(data.price).toFixed(2);
     formData.append("title", data.title);
-    formData.append("price", data.price);
+    formData.append("price", formattedPrice);
     formData.append("category", data.category);
     formData.append("is_available", data.is_available);
     formData.append("is_new", data.is_new);
@@ -27,9 +28,8 @@ export const ProductEdit = () => {
         message.success("success");
         navigate("/app/product");
       },
-      onError: (err) => {
-        message.error("error");
-        console.log(err);
+      onError: (err: Error | undefined | any) => {
+        message.error(`${err.response.data.price} in price `);
       },
     });
   };

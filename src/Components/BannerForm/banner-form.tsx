@@ -13,6 +13,7 @@ export const BannerForm: React.FC<BrandFormType> = ({
   defaultFileList,
 }) => {
   const [form] = Form.useForm();
+
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   useEffect(() => {
@@ -36,7 +37,7 @@ export const BannerForm: React.FC<BrandFormType> = ({
           : []
       );
     }
-  }, [form, data]);
+  }, [data]);
 
   return (
     <>

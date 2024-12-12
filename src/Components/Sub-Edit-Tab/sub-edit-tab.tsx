@@ -15,6 +15,8 @@ import { useAttributeEdit } from "../../Service/Mutation/useAttributeEdit";
 export const SubEditTab = () => {
   const { id } = useParams();
   const { data: singleData, isLoading } = useGetSingleData(id);
+  console.log(singleData);
+
   const { mutate } = useEditCategory();
   const navigate = useNavigate();
   const { mutate: editAttribute } = useAttributeEdit();
