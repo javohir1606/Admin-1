@@ -1,4 +1,4 @@
-import { Button, Flex, message, Table, Image, Popconfirm } from "antd";
+import { Button, Flex, message, Table, Popconfirm } from "antd";
 import { Link, useParams } from "react-router-dom";
 import { columnType, Datas } from "../../Types/data-types";
 import { useQueryClient } from "@tanstack/react-query";
@@ -6,12 +6,17 @@ import { uesGetProductVariants } from "../../Service/Query/uesGetProductVariants
 import { useProductVariantsDelete } from "../../Service/Mutation/useProductVariantsDelete";
 export const ProductVariants = () => {
   const { id } = useParams();
+
+  const qwerty = id;
+
   const { data: reeeeeeeeeeeee } = uesGetProductVariants();
   const Variantsss = reeeeeeeeeeeee?.results?.map((item: number) => item);
 
   const IDID = Variantsss?.filter(
     (item: number | any) => item.product === Number(id)
   );
+
+  console.log(IDID);
 
   const dataSource = IDID?.map((item: Datas) => {
     return {
@@ -29,7 +34,7 @@ export const ProductVariants = () => {
     mutate(id, {
       onSuccess: () => {
         message.success("success");
-        client.invalidateQueries({ queryKey: ["get-data"] });
+        client.invalidateQueries({ queryKey: ["product-variants"] });
       },
       onError: (error) => {
         console.log(error);
@@ -51,16 +56,12 @@ export const ProductVariants = () => {
       dataIndex: "img",
       align: "center",
       key: "image",
-      render: (image: string) => (
-        <div style={{ textAlign: "center" }}>
-          <Image
-            style={{
-              width: "70px",
-            }}
-            src={image}
-            alt="#"
-          />
-        </div>
+      render: (_: any, record: any) => (
+        <Link to={`/app/product/variants/${qwerty}/${record.id}/images`}>
+          <Button variant="solid" type="primary">
+            Show Added Images
+          </Button>
+        </Link>
       ),
     },
     {
@@ -83,9 +84,9 @@ export const ProductVariants = () => {
       render: (_: any, record: Datas) => (
         <Flex gap={"20px"} justify="center">
           <div>
-            <Link to={`/app/edit-category/${record.id}`}>
+            <Link to={`/app/product/variants/${qwerty}/${record.id}`}>
               <Button type="primary" style={{ backgroundColor: "#f1cf0f" }}>
-                Edit
+                Add image
               </Button>
             </Link>
           </div>

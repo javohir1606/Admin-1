@@ -4,6 +4,6 @@ import { request } from "../../Config/request";
 export const useProductVariantsCreate = () => {
   return useMutation({
     mutationFn: (data: any) =>
-      request.post(`/product_variant/`, data).then((res) => res.data),
+      request.post(`/product_variant/`, data).then((res) => res.data.data),
   });
 };
