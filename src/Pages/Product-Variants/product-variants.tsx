@@ -4,17 +4,16 @@ import { columnType, Datas } from "../../Types/data-types";
 import { useQueryClient } from "@tanstack/react-query";
 import { uesGetProductVariants } from "../../Service/Query/uesGetProductVariants";
 import { useProductVariantsDelete } from "../../Service/Mutation/useProductVariantsDelete";
-import { useGetProducts } from "../../Service/Query/useGetProducts";
 export const ProductVariants = () => {
-  const { data } = uesGetProductVariants();
   const { id } = useParams();
-  const { data: hero } = useGetProducts();
+  const { data: reeeeeeeeeeeee } = uesGetProductVariants();
+  const Variantsss = reeeeeeeeeeeee?.results?.map((item: number) => item);
 
-  const heroCategory = hero?.results.find(
-    (item: any) => item.id === Number(id)
-  )?.category;
+  const IDID = Variantsss?.filter(
+    (item: number | any) => item.product === Number(id)
+  );
 
-  const dataSource = data?.results.map((item: Datas) => {
+  const dataSource = IDID?.map((item: Datas) => {
     return {
       key: item.id,
       id: item.id,
@@ -112,7 +111,7 @@ export const ProductVariants = () => {
   return (
     <>
       <div style={{ marginBottom: "20px" }}>
-        <Link to={`/app/product/variants/${id}/${heroCategory}/create`}>
+        <Link to={`/app/product/variants/${id}/create`}>
           <Button type="primary">Create</Button>
         </Link>
       </div>

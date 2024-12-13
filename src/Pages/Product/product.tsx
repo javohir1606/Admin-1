@@ -7,20 +7,6 @@ import { useDeleteProducts } from "../../Service/Mutation/useDeleteProducts";
 
 export const Product = () => {
   const { data } = useGetProducts();
-  console.log(data);
-
-  const { data: hero } = useGetProducts();
-  console.log(hero);
-
-  // const Herooo = hero?.results.map((item: any) => item.category);
-
-  // const categoryId = data?.results;
-  // console.log("asddas", categoryId);
-
-  // const IDID = categoryId?.filter((item) => item.category === Herooo);
-  // console.log("IDID", IDID);
-  // Specific ID you're looking for
-  // Specific ID you're looking for
 
   const dataSource = data?.results.map((item: Datas) => {
     return {
@@ -91,44 +77,39 @@ export const Product = () => {
       align: "center",
       width: "25%",
       render: (_: any, record: Datas) => (
-        console.log("record", record),
-        (
-          <Flex gap={"20px"} justify="center">
-            <div>
-              <Link to={`/app/product/edit/${record.id}`}>
-                <Button type="primary" style={{ backgroundColor: "#f1cf0f" }}>
-                  Edit
-                </Button>
-              </Link>
-            </div>
-            <div>
-              <Popconfirm
-                onConfirm={() => {
-                  return DeleteCategory(record.id);
-                }}
-                cancelText={"No"}
-                okText={"Yes"}
-                title={"Do you wish to continue with past date?"}
-              >
-                <Button type="primary" style={{ backgroundColor: "red" }}>
-                  Delete
-                </Button>
-              </Popconfirm>
-            </div>
-            <div>
-              <Link
-                to={`/app/product/variants/${record.id}/${record.category}`}
-              >
-                <Button type="primary">Variants</Button>
-              </Link>
-            </div>
-            <div>
-              <Button type="primary" style={{ backgroundColor: "green" }}>
-                Category
+        <Flex gap={"20px"} justify="center">
+          <div>
+            <Link to={`/app/product/edit/${record.id}`}>
+              <Button type="primary" style={{ backgroundColor: "#f1cf0f" }}>
+                Edit
               </Button>
-            </div>
-          </Flex>
-        )
+            </Link>
+          </div>
+          <div>
+            <Popconfirm
+              onConfirm={() => {
+                return DeleteCategory(record.id);
+              }}
+              cancelText={"No"}
+              okText={"Yes"}
+              title={"Do you wish to continue with past date?"}
+            >
+              <Button type="primary" style={{ backgroundColor: "red" }}>
+                Delete
+              </Button>
+            </Popconfirm>
+          </div>
+          <div>
+            <Link to={`/app/product/variants/${record.id}`}>
+              <Button type="primary">Variants</Button>
+            </Link>
+          </div>
+          <div>
+            <Button type="primary" style={{ backgroundColor: "green" }}>
+              Category
+            </Button>
+          </div>
+        </Flex>
       ),
     },
   ];
@@ -140,13 +121,7 @@ export const Product = () => {
           <Button type="primary">Create</Button>
         </Link>
       </div>
-      <Table
-        dataSource={dataSource}
-        columns={columns}
-        bordered
-        size="large"
-        // pagination={false}
-      />
+      <Table dataSource={dataSource} columns={columns} bordered size="large" />
     </>
   );
 };

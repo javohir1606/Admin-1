@@ -102,11 +102,11 @@ export const RoutersData: RouteType[] = [
   {
     id: nanoid(),
     component: ProductVariants,
-    path: "/app/product/variants/:id/:category",
+    path: "/app/product/variants/:id",
   },
   {
     id: nanoid(),
     component: ProductVariantsCreate,
-    path: "/app/product/variants/:id/:category/create",
+    path: "/app/product/variants/:id/create",
   },
 ];
