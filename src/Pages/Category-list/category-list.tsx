@@ -5,6 +5,7 @@ import { useGetData } from "../../Service/Query/useGetData";
 import { columnType, Datas } from "../../Types/data-types";
 import { useDeleteData } from "../../Service/Mutation/useDeleteData";
 import { useQueryClient } from "@tanstack/react-query";
+import { CategorySearch } from "../../Components/CategorySearch";
 
 export const CategoryList = () => {
   const { data } = useGetData();
@@ -110,11 +111,22 @@ export const CategoryList = () => {
 
   return (
     <>
-      <div style={{ marginBottom: "20px" }}>
-        <Link to={"create-category"}>
-          <Button type="primary">Create</Button>
-        </Link>
-      </div>
+      <Flex>
+        <div style={{ marginBottom: "20px" }}>
+          <Link to={"create-category"}>
+            <Button type="primary">Create</Button>
+          </Link>
+        </div>
+        <div
+          style={{
+            textAlign: "center",
+            margin: "auto",
+            width: "600px",
+          }}
+        >
+          <CategorySearch />
+        </div>
+      </Flex>
       <Table
         dataSource={dataSource}
         columns={columns}

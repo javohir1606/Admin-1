@@ -4,6 +4,7 @@ import { columnType, Datas } from "../../Types/data-types";
 import { useQueryClient } from "@tanstack/react-query";
 import { useGetProducts } from "../../Service/Query/useGetProducts";
 import { useDeleteProducts } from "../../Service/Mutation/useDeleteProducts";
+import { ProductSearch } from "../../Components/ProductSearch";
 
 export const Product = () => {
   const { data } = useGetProducts();
@@ -116,11 +117,22 @@ export const Product = () => {
 
   return (
     <>
-      <div style={{ marginBottom: "20px" }}>
-        <Link to={"/app/product/create"}>
-          <Button type="primary">Create</Button>
-        </Link>
-      </div>
+      <Flex>
+        <div style={{ marginBottom: "20px" }}>
+          <Link to={"/app/product/create"}>
+            <Button type="primary">Create</Button>
+          </Link>
+        </div>
+        <div
+          style={{
+            textAlign: "center",
+            margin: "auto",
+            width: "600px",
+          }}
+        >
+          <ProductSearch />
+        </div>
+      </Flex>
       <Table dataSource={dataSource} columns={columns} bordered size="large" />
     </>
   );
