@@ -4,6 +4,7 @@ import { columnType, Datas } from "../../Types/data-types";
 import { useQueryClient } from "@tanstack/react-query";
 import { uesGetProductVariants } from "../../Service/Query/uesGetProductVariants";
 import { useProductVariantsDelete } from "../../Service/Mutation/useProductVariantsDelete";
+import { ProductVariantSearch } from "../../Components/Product-Variant-Search/product-variant-search";
 export const ProductVariants = () => {
   const { id } = useParams();
 
@@ -16,8 +17,7 @@ export const ProductVariants = () => {
     (item: number | any) => item.product === Number(id)
   );
 
-  console.log(IDID);
-
+  const SearchProductVariantId = IDID?.map((item: Datas) => item.id);
   const dataSource = IDID?.map((item: Datas) => {
     return {
       key: item.id,
@@ -111,11 +111,25 @@ export const ProductVariants = () => {
 
   return (
     <>
-      <div style={{ marginBottom: "20px" }}>
-        <Link to={`/app/product/variants/${id}/create`}>
-          <Button type="primary">Create</Button>
-        </Link>
-      </div>
+      <Flex>
+        <div style={{ marginBottom: "20px" }}>
+          <Link to={`/app/product/variants/${id}/create`}>
+            <Button type="primary">Create</Button>
+          </Link>
+        </div>
+        <div
+          style={{
+            textAlign: "center",
+            margin: "auto",
+            width: "600px",
+          }}
+        >
+          <ProductVariantSearch
+            SearchProductVariantId={SearchProductVariantId}
+            SearchID={qwerty}
+          />
+        </div>
+      </Flex>
       <Table dataSource={dataSource} columns={columns} bordered size="large" />
     </>
   );
