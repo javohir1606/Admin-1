@@ -44,7 +44,8 @@ export const ProductVariantSearch: React.FC<TypeofSearchVariants> = ({
             gap={"20px"}
             style={{
               zIndex: 300,
-              background: "red",
+              background: "#c2b6b6",
+              boxShadow: `rgba(0, 0, 0, 0.35) 0px 5px 15px`,
               width: "100%",
               padding: "20px",
               borderRadius: "20px",
