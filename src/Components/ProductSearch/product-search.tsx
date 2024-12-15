@@ -7,7 +7,6 @@ export const ProductSearch = () => {
   const [input, setInput] = useState("");
   const debounceValue = useDebounce(input);
   const { data } = useProductSearch(debounceValue);
-  console.log(data);
 
   interface SearchType {
     key: number;

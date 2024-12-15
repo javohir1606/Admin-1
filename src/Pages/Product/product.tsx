@@ -106,9 +106,11 @@ export const Product = () => {
             </Link>
           </div>
           <div>
-            <Button type="primary" style={{ backgroundColor: "green" }}>
-              Category
-            </Button>
+            <Link to={`/app/sub-edit-category/${record.category}`}>
+              <Button type="primary" style={{ backgroundColor: "green" }}>
+                Category
+              </Button>
+            </Link>
           </div>
         </Flex>
       ),
