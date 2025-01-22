@@ -1,33 +1,39 @@
-import React from "react";
-import { Button, Image, Table, Popconfirm, message } from "antd";
-import type { TableColumnsType } from "antd";
-import { useBannerGet } from "./mutate/useBannerGet";
-import { Link } from "react-router-dom";
-import { useBannerDelete } from "./mutate/useBannerDelete";
+import {
+  Button,
+  Image,
+  message,
+  Popconfirm,
+  Table,
+  TableColumnsType,
+} from "antd";
+import { Link, useParams } from "react-router-dom";
+import { useProductVariantDelete } from "../mutate/useProductVariantDelete";
+import { useProdactVariantGet } from "../mutate/useProdactVariantGet";
 
-interface BannerData {
+interface ProdactData {
   id: number;
   title: string;
-  created_at: string;
-  updated_at: string;
   image: string | null;
-  description: string | null;
 }
 
-export const Banner: React.FC = () => {
-  const { data, isLoading, isError, error } = useBannerGet();
-  const { mutate } = useBannerDelete();
-  const columns: TableColumnsType<BannerData> = [
+export const ProdactVariant = () => {
+  const { id, category } = useParams();
+  const { data, isLoading, isError, error } = useProdactVariantGet();
+  console.log("data", data);
+  const prodactId = data?.results?.map((item: any) => item);
+
+  const filterID = prodactId?.filter(
+    (item: any) => item.product === Number(id)
+  );
+
+  const { mutate } = useProductVariantDelete(id as string | number);
+  const columns: TableColumnsType<ProdactData> = [
     {
       title: "ID",
       dataIndex: "id",
       key: "id",
     },
-    {
-      title: "Title",
-      dataIndex: "title",
-      key: "title",
-    },
+
     {
       title: "Image",
       dataIndex: "image",
@@ -36,25 +42,24 @@ export const Banner: React.FC = () => {
         image ? (
           <Image
             src={image}
-            alt="banner"
+            alt="brand"
             style={{ width: 100, height: 80, objectFit: "cover" }}
           />
         ) : (
-          <span>No Image</span>
+          <span>Rasm yo'q !</span>
         ),
     },
     {
-      title: "Description",
-      dataIndex: "description",
-      key: "description",
-      render: (text: string | null) => text || <span>No Description</span>,
+      title: "Name",
+      dataIndex: "title",
+      key: "title",
     },
     {
       title: "Change",
       key: "change",
       render: (_, record) => (
         <div style={{ display: "flex", gap: "8px" }}>
-          <Link to={`/app/create-banner-edite/${record.id}`}>
+          <Link to={`/app/product-variant/edit/${record.id}/${category}`}>
             <Button type="primary">Edit</Button>
           </Link>
           <Popconfirm
@@ -71,15 +76,14 @@ export const Banner: React.FC = () => {
       ),
     },
   ];
-
   const handleDelete = (id: number) => {
     mutate(id, {
       onSuccess: () => {
-        message.success("Banner deleted successfully!");
+        message.success("Brand deleted successfully!");
       },
       onError: (error) => {
         const errorMessage =
-          error instanceof Error ? error.message : "Failed to delete banner.";
+          error instanceof Error ? error.message : "Failed to delete brand.";
         message.error(errorMessage);
       },
     });
@@ -91,25 +95,24 @@ export const Banner: React.FC = () => {
 
   if (isError) {
     const errorMessage =
-      error instanceof Error ? error.message : "Failed to load banners.";
+      error instanceof Error ? error.message : "Failed to load brand.";
     return <p>{errorMessage}</p>;
   }
 
-  const dataSource = data?.results.map((banner: BannerData) => ({
-    key: banner.id,
-    ...banner,
+  const dataSource = filterID?.map((prodact: ProdactData) => ({
+    key: prodact?.id,
+    ...prodact,
   }));
-
   return (
     <>
-      <div style={{ overflowY: "scroll", height: "80vh" }}>
-        <Link to="/app/create-banner">
+      <div style={{ width: "100%", overflowY: "scroll", height: "80vh" }}>
+        <Link to={`/app/product-variant/create/${id}/${category}`}>
           <Button type="primary" style={{ marginBottom: 16 }}>
             Create
           </Button>
         </Link>
         <div style={{ marginTop: 16 }}>
-          <Table<BannerData>
+          <Table<ProdactData>
             columns={columns}
             dataSource={dataSource}
             rowKey="id"

@@ -1,43 +1,45 @@
-
+import React from "react";
 import {
-  //   UserOutlined,
-  //   UserAddOutlined,
-  ClusterOutlined,
-  DatabaseOutlined,
-  ShoppingOutlined,
-  SkinOutlined,
-  BoldOutlined,
+  FileAddOutlined,
+  FileImageOutlined,
+  FolderOpenOutlined,
+  HddOutlined,
+  TagOutlined,
 } from "@ant-design/icons";
+import { AntdIconProps } from "@ant-design/icons/lib/components/AntdIcon";
 
-export const data = [
+export interface LayoutType {
+  label: string;
+  icon: React.ForwardRefExoticComponent<
+    Omit<AntdIconProps, "ref"> & React.RefAttributes<HTMLSpanElement>
+  >;
+  key: string;
+}
+
+export const layoutData: LayoutType[] = [
   {
-    id: "1",
-    label: "Category-List",
-    icon: DatabaseOutlined,
-    path: "/app",
+    label: "Banner",
+    key: "/app/banner",
+    icon: FolderOpenOutlined,
   },
   {
-    id: "2",
-    label: "Sub-Category-List",
-    icon: ClusterOutlined,
-    path: "/app/sub-category-list",
+    label: "Category List",
+    key: "/app/category",
+    icon: HddOutlined,
   },
   {
-    id: "3",
-    label: "Brand-List",
-    icon: SkinOutlined,
-    path: "/app/brand-list",
+    label: "Sub Category",
+    key: "/app/sub-category",
+    icon: FileAddOutlined,
   },
   {
-    id: "4",
-    label: "Banner-List",
-    icon: BoldOutlined,
-    path: "/app/banner",
+    label: "Brand list",
+    key: "/app/brand",
+    icon: FileImageOutlined,
   },
   {
-    id: "5",
-    label: "Product",
-    icon: ShoppingOutlined,
-    path: "/app/product",
+    label: "Prodact",
+    key: "/app/prodact",
+    icon: TagOutlined,
   },
 ];

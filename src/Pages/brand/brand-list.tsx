@@ -1,23 +1,25 @@
-import React from "react";
-import { Button, Image, Table, Popconfirm, message } from "antd";
-import type { TableColumnsType } from "antd";
-import { useBannerGet } from "./mutate/useBannerGet";
+import {
+  Button,
+  Image,
+  message,
+  Popconfirm,
+  Table,
+  TableColumnsType,
+} from "antd";
+import { useGet } from "./mutate/useGet";
 import { Link } from "react-router-dom";
-import { useBannerDelete } from "./mutate/useBannerDelete";
+import { useDelete } from "./mutate/useDelete";
 
-interface BannerData {
+interface BrandData {
   id: number;
   title: string;
-  created_at: string;
-  updated_at: string;
   image: string | null;
-  description: string | null;
 }
 
-export const Banner: React.FC = () => {
-  const { data, isLoading, isError, error } = useBannerGet();
-  const { mutate } = useBannerDelete();
-  const columns: TableColumnsType<BannerData> = [
+export const Brand = () => {
+  const { data, isLoading, isError, error } = useGet();
+  const { mutate } = useDelete();
+  const columns: TableColumnsType<BrandData> = [
     {
       title: "ID",
       dataIndex: "id",
@@ -36,7 +38,7 @@ export const Banner: React.FC = () => {
         image ? (
           <Image
             src={image}
-            alt="banner"
+            alt="brand"
             style={{ width: 100, height: 80, objectFit: "cover" }}
           />
         ) : (
@@ -44,17 +46,11 @@ export const Banner: React.FC = () => {
         ),
     },
     {
-      title: "Description",
-      dataIndex: "description",
-      key: "description",
-      render: (text: string | null) => text || <span>No Description</span>,
-    },
-    {
       title: "Change",
       key: "change",
       render: (_, record) => (
         <div style={{ display: "flex", gap: "8px" }}>
-          <Link to={`/app/create-banner-edite/${record.id}`}>
+          <Link to={`/app/brand-edite/${record.id}`}>
             <Button type="primary">Edit</Button>
           </Link>
           <Popconfirm
@@ -71,15 +67,14 @@ export const Banner: React.FC = () => {
       ),
     },
   ];
-
   const handleDelete = (id: number) => {
     mutate(id, {
       onSuccess: () => {
-        message.success("Banner deleted successfully!");
+        message.success("Brand deleted successfully!");
       },
       onError: (error) => {
         const errorMessage =
-          error instanceof Error ? error.message : "Failed to delete banner.";
+          error instanceof Error ? error.message : "Failed to delete brand.";
         message.error(errorMessage);
       },
     });
@@ -91,25 +86,24 @@ export const Banner: React.FC = () => {
 
   if (isError) {
     const errorMessage =
-      error instanceof Error ? error.message : "Failed to load banners.";
+      error instanceof Error ? error.message : "Failed to load brand.";
     return <p>{errorMessage}</p>;
   }
 
-  const dataSource = data?.results.map((banner: BannerData) => ({
-    key: banner.id,
-    ...banner,
+  const dataSource = data?.results.map((brand: BrandData) => ({
+    key: brand.id,
+    ...brand,
   }));
-
   return (
     <>
       <div style={{ overflowY: "scroll", height: "80vh" }}>
-        <Link to="/app/create-banner">
+        <Link to="/app/brand-create">
           <Button type="primary" style={{ marginBottom: 16 }}>
             Create
           </Button>
         </Link>
         <div style={{ marginTop: 16 }}>
-          <Table<BannerData>
+          <Table<BrandData>
             columns={columns}
             dataSource={dataSource}
             rowKey="id"

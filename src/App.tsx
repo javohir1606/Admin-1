@@ -1,18 +1,19 @@
 import { Route, Routes } from "react-router-dom";
-import { RoutersData } from "./Router/router";
-import { Login } from "./Pages/Login";
-import { MainLayout } from "./Layout";
-function App() {
+import { MainLayout } from "./layout/main-layout";
+import { SingIn } from "./pages/sing-in/sing-in";
+import { mainRoutes } from "./routes/routes";
+
+const App = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/app" element={<MainLayout />}>
-          {RoutersData.map(({ component: Element, id, path }) => (
+        <Route path="/" element={<SingIn />} />
+        <Route path="app" element={<MainLayout />}>
+          {mainRoutes?.map(({ component: Element, id, path }) => (
             <Route
               index={path ? false : true}
-              path={path}
               key={id}
+              path={path}
               element={<Element />}
             />
           ))}
@@ -20,6 +21,6 @@ function App() {
       </Routes>
     </>
   );
-}
+};
 
 export default App;
